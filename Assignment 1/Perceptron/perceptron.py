@@ -12,11 +12,15 @@ class Perceptron:
         self.activation_func = unit_step_func
 
 
-    def train(self, X, y):
+    def train(self, X, y, init: int=None):
         n_samples, n_features = X.shape
 
-        self.weights = np.zeros(n_features)
-        self.bias = 0
+        if init:
+            self.weights = np.random.rand(n_features) * init
+            self.bias = np.random.randint(0, init)
+        else:
+            self.weights = np.zeros(n_features)
+            self.bias = 0
         y_ = self.activation_func(y)
 
         n_iteration = 0
