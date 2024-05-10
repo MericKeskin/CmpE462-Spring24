@@ -3,7 +3,6 @@ import struct
 import numpy as np
 import pandas as pd
 
-# Define the Data class as provided by the user
 class DecisionTreeData:
     def __init__(self, path: str):
         self.df = pd.read_csv(path, header=None)
@@ -61,7 +60,7 @@ def read_svm_data(dataset: str, path: str, labels_to_keep: list):
         mask = lbl == label
         lbls = lbl[mask]
         imgs = img[mask]
-        # Limit the number of samples per label
+
         if len(lbls) > max_samples_per_label:
             idx = np.random.choice(len(lbls), max_samples_per_label, replace=False)
             lbls = lbls[idx]
