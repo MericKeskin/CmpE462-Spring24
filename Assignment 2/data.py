@@ -123,7 +123,7 @@ def read_svm_data(dataset: str, path: str, labels_to_keep: list):
 
     final_lbl = []
     final_img = []
-    
+
     for label in labels_to_keep:
         mask = lbl == label
         lbls = lbl[mask]
@@ -135,8 +135,13 @@ def read_svm_data(dataset: str, path: str, labels_to_keep: list):
             imgs = imgs[idx]
         final_lbl.append(lbls)
         final_img.append(imgs)
-    
+
     final_lbl = np.concatenate(final_lbl)
     final_img = np.concatenate(final_img)
+
+    # Shuffle the data
+    indices = np.random.permutation(len(final_lbl))
+    final_lbl = final_lbl[indices]
+    final_img = final_img[indices]
 
     return final_lbl, final_img
